@@ -1,14 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Solnet.Programs.Utilities;
+using System;
 
 namespace Solnet.Programs.Models.TokenSwap
 {
     public class SwapCurve
     {
-        public CurveType CurveType;
-        public CurveCalculator Calculator;
+        public CurveType CurveType { get; set; }
+        public CurveCalculator Calculator { get; set; }
+
+        private SwapCurve() { }
+
+        public ReadOnlySpan<byte> Serialize()
+        {
+            var ret = new byte[33];
+            ret.WriteU8((byte)CurveType, 0);
+            ret.WriteSpan(Calculator.Serialize(), 1);
+            return new Span<byte>(ret);
+        }
+
+        public static SwapCurve ConstantProduct => new SwapCurve() { CurveType = CurveType.ConstantProduct, Calculator = new ConstantProductCurve() };
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Solnet.Programs.Utilities;
 
 namespace Solnet.Programs.Models.TokenSwap
 {
@@ -50,5 +47,23 @@ namespace Solnet.Programs.Models.TokenSwap
         /// Host trading fee denominator.
         /// </summary>
         public ulong HostFeeDenomerator;
+        
+        /// <summary>
+        /// Serialize the Fees
+        /// </summary>
+        /// <returns>Serialized Fees</returns>
+        public Span<byte> Serialize()
+        {
+            var ret = new byte[64];
+            ret.WriteU64(TradeFeeNumerator, 0);
+            ret.WriteU64(TradeFeeDenominator, 8);
+            ret.WriteU64(OwnerTradeFeeNumerator, 16);
+            ret.WriteU64(OwnerTradeFeeDenomerator, 24);
+            ret.WriteU64(OwnerWithrawFeeNumerator, 32);
+            ret.WriteU64(OwnerWithrawFeeDenomerator, 40);
+            ret.WriteU64(HostFeeNumerator, 48);
+            ret.WriteU64(HostFeeDenomerator, 56);
+            return new Span<byte>(ret);
+        }
     }
 }
