@@ -3,14 +3,14 @@ using System.Collections.Generic;
 namespace Solnet.Programs
 {
     /// <summary>
-    /// Represents the instruction types for the <see cref="TokenSwap"/> along with a friendly name so as not to use reflection.
+    /// Represents the instruction types for the <see cref="TokenSwapProgram"/> along with a friendly name so as not to use reflection.
     /// <remarks>
     /// For more information see:
     /// https://spl.solana.com/token-swap
     /// https://docs.rs/spl-token-swap/2.1.0/spl_token_swap/
     /// </remarks>
     /// </summary>
-    internal static class TokenSwapInstructions
+    internal static class TokenSwapProgramInstructions
     {
         /// <summary>
         /// Represents the user-friendly names for the instruction types for the <see cref="TokenSwapProgram"/>.
