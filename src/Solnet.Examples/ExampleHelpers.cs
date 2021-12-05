@@ -15,7 +15,7 @@ namespace Solnet.Examples
 
     public class Examples
     {
-        private static readonly IRpcClient RpcClient = ClientFactory.GetClient(Cluster.TestNet);
+        private static readonly IRpcClient RpcClient = ClientFactory.GetClient("http://127.0.0.1:8899");
 
         public static string PrettyPrintTransactionSimulationLogs(string[] logMessages)
         {
@@ -28,13 +28,16 @@ namespace Solnet.Examples
         /// <param name="tx">The transaction data ready to simulate or submit to the network.</param>
         public static string SubmitTxSendAndLog(byte[] tx)
         {
-            Console.WriteLine($"Tx Data: {Convert.ToBase64String(tx)}");
+            var rawTx = Transaction.Deserialize(tx).CompileMessage();
+            Console.WriteLine($"Raw tx Data: {Convert.ToBase64String(rawTx)}");
 
             RequestResult<ResponseValue<SimulationLogs>> txSim = RpcClient.SimulateTransaction(tx);
             string logs = PrettyPrintTransactionSimulationLogs(txSim.Result.Value.Logs);
             Console.WriteLine($"Transaction Simulation:\n\tError: {txSim.Result.Value.Error}\n\tLogs: \n" + logs);
 
             RequestResult<string> txReq = RpcClient.SendTransaction(tx);
+            if (!txReq.WasSuccessful)
+                throw new Exception(txReq.Reason);
             Console.WriteLine($"Tx Signature: {txReq.Result}");
 
             return txReq.Result;

@@ -29,6 +29,13 @@ namespace Solnet.Programs.TokenSwap
         /// </summary>
         public static readonly string TokenSwapProgramName = "Token Swap Program";
 
+        /// <summary>
+        /// Token Swap account layout size.
+        /// </summary>
+        public static readonly ulong TokenSwapAccountDataSize = 323;
+
+        public static readonly TokenSwapProgramAccountDecoder TokenSwapProgramAccountDecoder = new TokenSwapProgramAccountDecoder();
+
         
         //instance vars
 
@@ -37,11 +44,8 @@ namespace Solnet.Programs.TokenSwap
         /// </summary>
         public virtual PublicKey OwnerKey => new("HfoTxFR1Tm6kGmWgYWD6J7YHVy1UwqSULUGVLXkJqaKN");
 
-        /// <summary>
-        /// Token Swap account layout size.
-        /// </summary>
-        public static readonly ulong TokenSwapAccountDataSize = 323;
-        
+        public override ProgramAccountDecoder AccountDecoder => TokenSwapProgramAccountDecoder;
+
         /// <summary>
         /// Create a token swap program instance with the standard programid and program name
         /// </summary>

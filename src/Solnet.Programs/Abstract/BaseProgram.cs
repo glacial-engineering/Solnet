@@ -1,9 +1,4 @@
 ﻿using Solnet.Wallet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solnet.Programs.Abstract
 {
@@ -24,6 +19,11 @@ namespace Solnet.Programs.Abstract
         /// The program's name.
         /// </summary>
         public virtual string ProgramName => _programName;
+
+        /// <summary>
+        /// The abstract account decoder to be implemented
+        /// </summary>
+        public abstract ProgramAccountDecoder AccountDecoder { get; }
 
         /// <summary>
         /// Creates an instance of the base program class with specified id and name
