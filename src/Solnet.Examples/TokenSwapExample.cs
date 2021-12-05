@@ -30,6 +30,8 @@ namespace Solnet.Examples
 
             Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             var tokenAMint = new Account();
             var tokenAUserAccount = new Account();
             var tokenBMint = new Account();
@@ -45,56 +47,56 @@ namespace Solnet.Examples
                     tokenAMint,
                     RpcClient.GetMinimumBalanceForRentExemption(TokenProgram.MintAccountDataSize).Result,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey
+                    TokenProgram.TokenProgramIdKey
                 ))
                 .AddInstruction(SystemProgram.CreateAccount(
                     wallet.Account,
                     tokenBMint,
                     RpcClient.GetMinimumBalanceForRentExemption(TokenProgram.MintAccountDataSize).Result,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey
+                    TokenProgram.TokenProgramIdKey
                 ))
                 .AddInstruction(SystemProgram.CreateAccount(
                     wallet.Account,
                     tokenAUserAccount,
                     RpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey
+                    TokenProgram.TokenProgramIdKey
                 ))
                 .AddInstruction(SystemProgram.CreateAccount(
                     wallet.Account,
                     tokenBUserAccount,
                     RpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey
+                    TokenProgram.TokenProgramIdKey
                 ))
-                .AddInstruction(TokenProgram.InitializeMint(
+                .AddInstruction(tokenProgram.InitializeMint(
                     tokenAMint,
                     9,
                     wallet.Account
                 ))
-                .AddInstruction(TokenProgram.InitializeMint(
+                .AddInstruction(tokenProgram.InitializeMint(
                     tokenBMint,
                     9,
                     wallet.Account
                 ))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                .AddInstruction(tokenProgram.InitializeAccount(
                     tokenAUserAccount,
                     tokenAMint,
                     wallet.Account
                 ))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                .AddInstruction(tokenProgram.InitializeAccount(
                     tokenBUserAccount,
                     tokenBMint,
                     wallet.Account
                 ))
-                .AddInstruction(TokenProgram.MintTo(
+                .AddInstruction(tokenProgram.MintTo(
                     tokenAMint,
                     tokenAUserAccount,
                     1_000_000_000_000,
                     wallet.Account
                 ))
-                .AddInstruction(TokenProgram.MintTo(
+                .AddInstruction(tokenProgram.MintTo(
                     tokenBMint,
                     tokenBUserAccount,
                     1_000_000_000_000,
@@ -121,14 +123,14 @@ namespace Solnet.Examples
                     swapTokenAAccount,
                     RpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey
+                    TokenProgram.TokenProgramIdKey
                 ))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                .AddInstruction(tokenProgram.InitializeAccount(
                     swapTokenAAccount,
                     tokenAMint,
                     swapAuthority
                 ))
-                .AddInstruction(TokenProgram.Transfer(
+                .AddInstruction(tokenProgram.Transfer(
                     tokenAUserAccount,
                     swapTokenAAccount,
                     5_000_000_000,
@@ -139,14 +141,14 @@ namespace Solnet.Examples
                     swapTokenBAccount,
                     RpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey
+                    TokenProgram.TokenProgramIdKey
                 ))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                .AddInstruction(tokenProgram.InitializeAccount(
                     swapTokenBAccount,
                     tokenBMint,
                     swapAuthority
                 ))
-                .AddInstruction(TokenProgram.Transfer(
+                .AddInstruction(tokenProgram.Transfer(
                     tokenBUserAccount,
                     swapTokenBAccount,
                     5_000_000_000,
@@ -170,9 +172,9 @@ namespace Solnet.Examples
                     poolMint,
                     RpcClient.GetMinimumBalanceForRentExemption(TokenProgram.MintAccountDataSize).Result,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey
+                    TokenProgram.TokenProgramIdKey
                 ))
-                .AddInstruction(TokenProgram.InitializeMint(
+                .AddInstruction(tokenProgram.InitializeMint(
                     poolMint,
                     9,
                     swapAuthority
@@ -182,9 +184,9 @@ namespace Solnet.Examples
                     poolUserAccount,
                     RpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey
+                    TokenProgram.TokenProgramIdKey
                 ))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                .AddInstruction(tokenProgram.InitializeAccount(
                     poolUserAccount,
                     poolMint,
                     wallet.Account
@@ -194,9 +196,9 @@ namespace Solnet.Examples
                     poolFeeAccount,
                     RpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey
+                    TokenProgram.TokenProgramIdKey
                 ))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                .AddInstruction(tokenProgram.InitializeAccount(
                     poolFeeAccount,
                     poolMint,
                     program.OwnerKey

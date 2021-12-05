@@ -25,6 +25,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
 
             ulong minBalanceForExemptionMultiSig =
@@ -56,8 +58,8 @@ namespace Solnet.Examples
                     multiSignature,
                     minBalanceForExemptionMultiSig,
                     TokenProgram.MultisigAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeMultiSignature(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeMultiSignature(
                     multiSignature,
                     new List<PublicKey> { signerAccount1, signerAccount2, signerAccount3, signerAccount4, signerAccount5 },
                     3))
@@ -66,8 +68,8 @@ namespace Solnet.Examples
                     mintAccount.PublicKey,
                     minBalanceForExemptionMint,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeMint(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeMint(
                     mintAccount.PublicKey,
                     10,
                     multiSignature))
@@ -99,12 +101,12 @@ namespace Solnet.Examples
                     initialAccount,
                     minBalanceForExemptionAcc,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount.PublicKey))
-                .AddInstruction(TokenProgram.MintTo(
+                .AddInstruction(tokenProgram.MintTo(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     25000,
@@ -153,6 +155,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
 
             ulong minBalanceForExemptionMultiSig =
@@ -177,7 +181,7 @@ namespace Solnet.Examples
 
             byte[] msgData = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.MintToChecked(
+                .AddInstruction(tokenProgram.MintToChecked(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     multiSignature,
@@ -226,6 +230,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
 
             ulong minBalanceForExemptionMultiSig =
@@ -262,8 +268,8 @@ namespace Solnet.Examples
                     tokenMultiSignature,
                     minBalanceForExemptionMultiSig,
                     TokenProgram.MultisigAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeMultiSignature(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeMultiSignature(
                     tokenMultiSignature,
                     new List<PublicKey>
                     {
@@ -279,12 +285,12 @@ namespace Solnet.Examples
                     tokenAccountWithMultisigOwner,
                     minBalanceForExemptionAcc,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeAccount(
                     tokenAccountWithMultisigOwner,
                     mintAccount,
                     tokenMultiSignature))
-                .AddInstruction(TokenProgram.TransferChecked(
+                .AddInstruction(tokenProgram.TransferChecked(
                     initialAccount,
                     tokenAccountWithMultisigOwner,
                     10000, 10,
@@ -312,7 +318,7 @@ namespace Solnet.Examples
             // multi sig account back to the initial account
             msgData = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.Transfer(
+                .AddInstruction(tokenProgram.Transfer(
                     tokenAccountWithMultisigOwner,
                     initialAccount,
                     10000,
@@ -358,6 +364,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
 
             ulong minBalanceForExemptionMultiSig =
@@ -398,8 +406,8 @@ namespace Solnet.Examples
                     freezeMultiSignature,
                     minBalanceForExemptionMultiSig,
                     TokenProgram.MultisigAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeMultiSignature(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeMultiSignature(
                     freezeMultiSignature,
                     new List<PublicKey>
                     {
@@ -438,8 +446,8 @@ namespace Solnet.Examples
                     mintMultiSignature,
                     minBalanceForExemptionMultiSig,
                     TokenProgram.MultisigAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeMultiSignature(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeMultiSignature(
                     mintMultiSignature,
                     new List<PublicKey>
                     {
@@ -454,8 +462,8 @@ namespace Solnet.Examples
                     mintAccount,
                     minBalanceForExemptionMint,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeMint(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeMint(
                     mintAccount,
                     10,
                     mintMultiSignature,
@@ -488,12 +496,12 @@ namespace Solnet.Examples
                     initialAccount,
                     minBalanceForExemptionAcc,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeAccount(
                     initialAccount,
                     mintAccount,
                     ownerAccount.PublicKey))
-                .AddInstruction(TokenProgram.MintTo(
+                .AddInstruction(tokenProgram.MintTo(
                     mintAccount,
                     initialAccount,
                     25000,
@@ -531,11 +539,11 @@ namespace Solnet.Examples
             // Notice how the signers used are different, because the `freezeAuthority` has different signers
             msgData = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.FreezeAccount(
+                .AddInstruction(tokenProgram.FreezeAccount(
                         initialAccount,
                         mintAccount,
                         freezeMultiSignature,
-                        TokenProgram.ProgramIdKey,
+                        TokenProgram.TokenProgramIdKey,
                         new List<PublicKey>
                         {
                             freezeSigner2,
@@ -567,18 +575,18 @@ namespace Solnet.Examples
             // Because we're actually cool people, we now thaw that same account and then set the authority to nothing
             msgData = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.ThawAccount(
+                .AddInstruction(tokenProgram.ThawAccount(
                     initialAccount,
                     mintAccount,
                     freezeMultiSignature,
-                    TokenProgram.ProgramIdKey,
+                    TokenProgram.TokenProgramIdKey,
                     new List<PublicKey>
                     {
                         freezeSigner2,
                         freezeSigner3,
                         freezeSigner4,
                     }))
-                .AddInstruction(TokenProgram.SetAuthority(
+                .AddInstruction(tokenProgram.SetAuthority(
                     mintAccount,
                     AuthorityType.FreezeAccount,
                     freezeMultiSignature,
@@ -626,6 +634,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
 
             ulong minBalanceForExemptionMultiSig =
@@ -672,8 +682,8 @@ namespace Solnet.Examples
                     tokenMultiSignature,
                     minBalanceForExemptionMultiSig,
                     TokenProgram.MultisigAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeMultiSignature(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeMultiSignature(
                     tokenMultiSignature,
                     new List<PublicKey>
                     {
@@ -711,12 +721,12 @@ namespace Solnet.Examples
                     tokenAccountWithMultisigOwner,
                     minBalanceForExemptionAcc,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeAccount(
                     tokenAccountWithMultisigOwner,
                     mintAccount,
                     tokenMultiSignature))
-                .AddInstruction(TokenProgram.MintTo(
+                .AddInstruction(tokenProgram.MintTo(
                     mintAccount,
                     tokenAccountWithMultisigOwner,
                     25000,
@@ -752,7 +762,7 @@ namespace Solnet.Examples
 
             msgData = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.ApproveChecked(
+                .AddInstruction(tokenProgram.ApproveChecked(
                         tokenAccountWithMultisigOwner,
                         delegateAccount,
                         5000,
@@ -790,14 +800,14 @@ namespace Solnet.Examples
 
             msgData = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.TransferChecked(
+                .AddInstruction(tokenProgram.TransferChecked(
                     tokenAccountWithMultisigOwner,
                     initialAccount,
                     5000,
                     10,
                     delegateAccount,
                     mintAccount))
-                .AddInstruction(TokenProgram.Revoke(
+                .AddInstruction(tokenProgram.Revoke(
                     tokenAccountWithMultisigOwner,
                     tokenMultiSignature,
                     new List<PublicKey>
@@ -844,6 +854,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
 
             ulong minBalanceForExemptionMultiSig =
@@ -880,7 +892,7 @@ namespace Solnet.Examples
 
             byte[] msgData = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.MintToChecked(
+                .AddInstruction(tokenProgram.MintToChecked(
                     mintAccount,
                     tokenAccountWithMultisigOwner,
                     mintMultiSignature,
@@ -892,7 +904,7 @@ namespace Solnet.Examples
                         mintSigner2,
                         mintSigner3
                     }))
-                .AddInstruction(TokenProgram.BurnChecked(
+                .AddInstruction(tokenProgram.BurnChecked(
                     mintAccount,
                     tokenAccountWithMultisigOwner,
                     tokenMultiSignature,
@@ -945,6 +957,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
 
             ulong minBalanceForExemptionMultiSig =
@@ -975,7 +989,7 @@ namespace Solnet.Examples
 
             byte[] msgData = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.BurnChecked(
+                .AddInstruction(tokenProgram.BurnChecked(
                     mintAccount,
                     tokenAccountWithMultisigOwner,
                     tokenMultiSignature,
@@ -987,11 +1001,11 @@ namespace Solnet.Examples
                         tokenAccountSigner2,
                         tokenAccountSigner3
                     }))
-                .AddInstruction(TokenProgram.CloseAccount(
+                .AddInstruction(tokenProgram.CloseAccount(
                     tokenAccountWithMultisigOwner,
                     ownerAccount,
                     tokenMultiSignature,
-                    TokenProgram.ProgramIdKey,
+                    TokenProgram.TokenProgramIdKey,
                     new List<PublicKey>()
                     {
                         tokenAccountSigner1,

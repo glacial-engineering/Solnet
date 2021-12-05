@@ -25,6 +25,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             /*
              * The following region creates and initializes a mint account, it also creates a token account
              * that is initialized with the same mint account and then mints tokens to this newly created token account.
@@ -57,8 +59,8 @@ namespace Solnet.Examples
                     mintAccount,
                     minBalanceForExemptionMint,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey)).
-                AddInstruction(TokenProgram.InitializeMint(
+                    TokenProgram.TokenProgramIdKey)).
+                AddInstruction(tokenProgram.InitializeMint(
                     mintAccount.PublicKey,
                     2,
                     ownerAccount.PublicKey,
@@ -68,12 +70,12 @@ namespace Solnet.Examples
                     initialAccount,
                     minBalanceForExemptionAcc,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey)).
-                AddInstruction(TokenProgram.InitializeAccount(
+                    TokenProgram.TokenProgramIdKey)).
+                AddInstruction(tokenProgram.InitializeAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount.PublicKey)).
-                AddInstruction(TokenProgram.MintTo(
+                AddInstruction(tokenProgram.MintTo(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     1_000_000,
@@ -109,7 +111,7 @@ namespace Solnet.Examples
                     ownerAccount,
                     associatedTokenAccountOwner,
                     mintAccount)).
-                AddInstruction(TokenProgram.Transfer(
+                AddInstruction(tokenProgram.Transfer(
                     initialAccount,
                     associatedTokenAccount,
                     25000,

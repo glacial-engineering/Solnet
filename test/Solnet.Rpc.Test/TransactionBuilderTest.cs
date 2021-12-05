@@ -125,6 +125,8 @@ namespace Solnet.Rpc.Test
         {
             var wallet = new Wallet.Wallet(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             var blockHash = "G9JC6E7LfG6ayxARq5zDV5RdDr6P8NJEdzTUJ8ttrSKs";
             var minBalanceForAccount = 2039280UL;
             var minBalanceForMintAccount = 1461600UL;
@@ -142,9 +144,9 @@ namespace Solnet.Rpc.Test
                     mintAccount,
                     minBalanceForMintAccount,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey))
+                    TokenProgram.TokenProgramIdKey))
                 .AddInstruction(
-                    TokenProgram.InitializeMint(
+                    tokenProgram.InitializeMint(
                     mintAccount.PublicKey,
                     2,
                     ownerAccount.PublicKey,
@@ -155,14 +157,14 @@ namespace Solnet.Rpc.Test
                     initialAccount,
                     minBalanceForAccount,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey))
+                    TokenProgram.TokenProgramIdKey))
                 .AddInstruction(
-                    TokenProgram.InitializeAccount(
+                    tokenProgram.InitializeAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount.PublicKey))
                 .AddInstruction(
-                    TokenProgram.MintTo(
+                    tokenProgram.MintTo(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     25000,

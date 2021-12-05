@@ -32,7 +32,7 @@ namespace Solnet.Programs
             InstructionDictionary.Add(MemoProgram.ProgramIdKey, MemoProgram.Decode);
             InstructionDictionary.Add(MemoProgram.ProgramIdKeyV2, MemoProgram.Decode);
             InstructionDictionary.Add(SystemProgram.ProgramIdKey, SystemProgram.Decode);
-            InstructionDictionary.Add(TokenProgram.ProgramIdKey, TokenProgram.Decode);
+            InstructionDictionary.Add(TokenProgram.TokenProgramIdKey, TokenProgram.Decode);
             InstructionDictionary.Add(TokenSwapProgram.TokenSwapProgramIdKey, TokenSwapProgram.Decode);
             InstructionDictionary.Add(AssociatedTokenAccountProgram.ProgramIdKey, AssociatedTokenAccountProgram.Decode);
             InstructionDictionary.Add(NameServiceProgram.ProgramIdKey, NameServiceProgram.Decode);

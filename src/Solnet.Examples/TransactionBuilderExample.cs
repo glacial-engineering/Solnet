@@ -57,6 +57,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
             ulong minBalanceForExemptionAcc =
                 rpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result;
@@ -80,8 +82,8 @@ namespace Solnet.Examples
                     mintAccount.PublicKey,
                     minBalanceForExemptionMint,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeMint(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeMint(
                     mintAccount.PublicKey,
                     2,
                     ownerAccount.PublicKey,
@@ -91,12 +93,12 @@ namespace Solnet.Examples
                     initialAccount,
                     minBalanceForExemptionAcc,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount.PublicKey))
-                .AddInstruction(TokenProgram.MintTo(
+                .AddInstruction(tokenProgram.MintTo(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     25000,
@@ -127,6 +129,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
             ulong minBalanceForExemptionAcc =
                 rpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result;
@@ -145,7 +149,7 @@ namespace Solnet.Examples
 
             byte[] tx = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.MintTo(
+                .AddInstruction(tokenProgram.MintTo(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     25000000,
@@ -176,6 +180,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
             ulong minBalanceForExemptionAcc = rpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result;
             Console.WriteLine($"MinBalanceForRentExemption Account >> {minBalanceForExemptionAcc}");
@@ -196,12 +202,12 @@ namespace Solnet.Examples
                     newAccount.PublicKey,
                     minBalanceForExemptionAcc,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                    TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeAccount(
                     newAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount.PublicKey))
-                .AddInstruction(TokenProgram.Transfer(
+                .AddInstruction(tokenProgram.Transfer(
                     initialAccount.PublicKey,
                     newAccount.PublicKey,
                     25000,
@@ -232,6 +238,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
             ulong minBalanceForExemptionAcc =
                 rpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result;
@@ -254,12 +262,12 @@ namespace Solnet.Examples
                         newAccount.PublicKey,
                         minBalanceForExemptionAcc,
                         TokenProgram.TokenAccountDataSize,
-                        TokenProgram.ProgramIdKey))
-                .AddInstruction(TokenProgram.InitializeAccount(
+                        TokenProgram.TokenProgramIdKey))
+                .AddInstruction(tokenProgram.InitializeAccount(
                         newAccount.PublicKey,
                         mintAccount.PublicKey,
                         ownerAccount.PublicKey))
-                .AddInstruction(TokenProgram.TransferChecked(
+                .AddInstruction(tokenProgram.TransferChecked(
                         initialAccount.PublicKey,
                         newAccount.PublicKey,
                         25000,
@@ -398,6 +406,8 @@ namespace Solnet.Examples
         {
             Wallet.Wallet wallet = new(MnemonicWords);
 
+            var tokenProgram = new TokenProgram();
+
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
 
             ulong minBalanceForExemptionMultiSig =
@@ -416,7 +426,7 @@ namespace Solnet.Examples
 
             byte[] msgData = new TransactionBuilder().SetRecentBlockHash(blockHash.Result.Value.Blockhash)
                 .SetFeePayer(ownerAccount)
-                .AddInstruction(TokenProgram.Burn(
+                .AddInstruction(tokenProgram.Burn(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     200,

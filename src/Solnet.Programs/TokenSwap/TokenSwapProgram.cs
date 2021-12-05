@@ -101,7 +101,7 @@ namespace Solnet.Programs.TokenSwap
                 AccountMeta.Writable(poolTokenMint, false),
                 AccountMeta.ReadOnly(poolTokenFeeAccount, false),
                 AccountMeta.Writable(userPoolTokenAccount, false),
-                AccountMeta.ReadOnly(TokenProgram.ProgramIdKey, false),
+                AccountMeta.ReadOnly(TokenProgram.TokenProgramIdKey, false),
             };
             return new TransactionInstruction
             {
@@ -150,7 +150,7 @@ namespace Solnet.Programs.TokenSwap
                 AccountMeta.Writable(tokenDestinationAccount, false),
                 AccountMeta.Writable(poolTokenMint, false),
                 AccountMeta.Writable(poolTokenFeeAccount, false),
-                AccountMeta.ReadOnly(TokenProgram.ProgramIdKey, false),
+                AccountMeta.ReadOnly(TokenProgram.TokenProgramIdKey, false),
             };
             if (poolTokenHostFeeAccount != null)
             {
@@ -204,7 +204,7 @@ namespace Solnet.Programs.TokenSwap
                 AccountMeta.Writable(tokenBDepositAccount, false),
                 AccountMeta.Writable(poolTokenMint, false),
                 AccountMeta.Writable(poolTokenUserAccount, false),
-                AccountMeta.ReadOnly(TokenProgram.ProgramIdKey, false),
+                AccountMeta.ReadOnly(TokenProgram.TokenProgramIdKey, false),
             };
             return new TransactionInstruction
             {
@@ -257,7 +257,7 @@ namespace Solnet.Programs.TokenSwap
                 AccountMeta.Writable(tokenAUserAccount, false),
                 AccountMeta.Writable(tokenBUserAccount, false),
                 AccountMeta.Writable(feeAccount, false),
-                AccountMeta.ReadOnly(TokenProgram.ProgramIdKey, false),
+                AccountMeta.ReadOnly(TokenProgram.TokenProgramIdKey, false),
             };
             return new TransactionInstruction
             {
@@ -303,7 +303,7 @@ namespace Solnet.Programs.TokenSwap
                 AccountMeta.Writable(destinationTokenBAccount, false),
                 AccountMeta.Writable(poolMintAccount, false),
                 AccountMeta.Writable(poolTokenUserAccount, false),
-                AccountMeta.ReadOnly(TokenProgram.ProgramIdKey, false),
+                AccountMeta.ReadOnly(TokenProgram.TokenProgramIdKey, false),
             };
             return new TransactionInstruction
             {
@@ -351,7 +351,7 @@ namespace Solnet.Programs.TokenSwap
                 AccountMeta.Writable(tokenBSwapAccount, false),
                 AccountMeta.Writable(tokenUserAccount, false),
                 AccountMeta.Writable(feeAccount, false),
-                AccountMeta.ReadOnly(TokenProgram.ProgramIdKey, false),
+                AccountMeta.ReadOnly(TokenProgram.TokenProgramIdKey, false),
             };
             return new TransactionInstruction
             {

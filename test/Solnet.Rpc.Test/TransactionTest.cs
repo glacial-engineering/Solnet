@@ -272,6 +272,8 @@ namespace Solnet.Rpc.Test
             Account mintAccount = wallet.GetAccount(1002);
             Account initialAccount = wallet.GetAccount(1102);
 
+            var tokenProgram = new TokenProgram();
+
             Transaction tx = new()
             {
                 FeePayer = ownerAccount,
@@ -284,8 +286,8 @@ namespace Solnet.Rpc.Test
                     mintAccount,
                     1461600UL,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .Add(TokenProgram.InitializeMint(
+                    TokenProgram.TokenProgramIdKey))
+                .Add(tokenProgram.InitializeMint(
                     mintAccount.PublicKey,
                     2,
                     ownerAccount.PublicKey,
@@ -295,12 +297,12 @@ namespace Solnet.Rpc.Test
                     initialAccount,
                     2039280UL,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .Add(TokenProgram.InitializeAccount(
+                    TokenProgram.TokenProgramIdKey))
+                .Add(tokenProgram.InitializeAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount.PublicKey))
-                .Add(TokenProgram.MintTo(
+                .Add(tokenProgram.MintTo(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     1_000_000,
@@ -319,6 +321,8 @@ namespace Solnet.Rpc.Test
             Account mintAccount = wallet.GetAccount(1002);
             Account initialAccount = wallet.GetAccount(1102);
 
+            var tokenProgram = new TokenProgram();
+
             Transaction tx = new()
             {
                 FeePayer = ownerAccount,
@@ -331,8 +335,8 @@ namespace Solnet.Rpc.Test
                     mintAccount,
                     1461600UL,
                     TokenProgram.MintAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .Add(TokenProgram.InitializeMint(
+                    TokenProgram.TokenProgramIdKey))
+                .Add(tokenProgram.InitializeMint(
                     mintAccount.PublicKey,
                     2,
                     ownerAccount.PublicKey,
@@ -342,12 +346,12 @@ namespace Solnet.Rpc.Test
                     initialAccount,
                     2039280UL,
                     TokenProgram.TokenAccountDataSize,
-                    TokenProgram.ProgramIdKey))
-                .Add(TokenProgram.InitializeAccount(
+                    TokenProgram.TokenProgramIdKey))
+                .Add(tokenProgram.InitializeAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount.PublicKey))
-                .Add(TokenProgram.MintTo(
+                .Add(tokenProgram.MintTo(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     1_000_000,

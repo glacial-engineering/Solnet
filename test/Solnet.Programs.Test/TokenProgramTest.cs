@@ -230,7 +230,7 @@ namespace Solnet.Programs.Test
             var initialAccount = wallet.GetAccount(24);
             var newAccount = wallet.GetAccount(26);
 
-            var txInstruction = TokenProgram.Transfer(
+            var txInstruction = new TokenProgram().Transfer(
                 initialAccount.PublicKey,
                 newAccount.PublicKey,
                 25000,
@@ -251,7 +251,7 @@ namespace Solnet.Programs.Test
             var initialAccount = wallet.GetAccount(26);
             var newAccount = wallet.GetAccount(27);
 
-            var txInstruction = TokenProgram.TransferChecked(
+            var txInstruction = new TokenProgram().TransferChecked(
                 initialAccount.PublicKey,
                 newAccount.PublicKey,
                 25000,
@@ -281,7 +281,7 @@ namespace Solnet.Programs.Test
                 signers.Add(wallet.GetAccount(420 + i));
             }
 
-            var txInstruction = TokenProgram.TransferChecked(
+            var txInstruction = new TokenProgram().TransferChecked(
                 initialAccount.PublicKey,
                 newAccount.PublicKey,
                 25000,
@@ -306,7 +306,7 @@ namespace Solnet.Programs.Test
             var initialAccount = wallet.GetAccount(22);
 
             var txInstruction =
-                TokenProgram.InitializeAccount(
+                new TokenProgram().InitializeAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount.PublicKey);
@@ -324,7 +324,7 @@ namespace Solnet.Programs.Test
             var mintAccount = wallet.GetAccount(21);
             var ownerAccount = wallet.GetAccount(10);
 
-            var txInstruction = TokenProgram.InitializeMint(
+            var txInstruction = new TokenProgram().InitializeMint(
                 mintAccount.PublicKey,
                 2,
                 ownerAccount.PublicKey,
@@ -347,7 +347,7 @@ namespace Solnet.Programs.Test
             {
                 signers.Add(wallet.GetAccount(420 + i).PublicKey);
             }
-            var txInstruction = TokenProgram.InitializeMultiSignature(multiSig.PublicKey, signers, 3);
+            var txInstruction = new TokenProgram().InitializeMultiSignature(multiSig.PublicKey, signers, 3);
 
             Assert.AreEqual(7, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(TokenProgramIdBytes, txInstruction.ProgramId);
@@ -364,7 +364,7 @@ namespace Solnet.Programs.Test
             var initialAccount = wallet.GetAccount(22);
 
             var txInstruction =
-                TokenProgram.MintTo(
+                new TokenProgram().MintTo(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     25000,
@@ -385,7 +385,7 @@ namespace Solnet.Programs.Test
             var initialAccount = wallet.GetAccount(22);
 
             var txInstruction =
-                TokenProgram.MintToChecked(
+                new TokenProgram().MintToChecked(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     ownerAccount,
@@ -412,7 +412,7 @@ namespace Solnet.Programs.Test
                 signers.Add(wallet.GetAccount(420 + i));
             }
             var txInstruction =
-                TokenProgram.MintToChecked(
+                new TokenProgram().MintToChecked(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     ownerAccount,
@@ -434,7 +434,7 @@ namespace Solnet.Programs.Test
             var initialAccount = wallet.GetAccount(22);
 
             var txInstruction =
-                TokenProgram.BurnChecked(
+                new TokenProgram().BurnChecked(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     ownerAccount,
@@ -461,7 +461,7 @@ namespace Solnet.Programs.Test
                 signers.Add(wallet.GetAccount(420 + i));
             }
             var txInstruction =
-                TokenProgram.BurnChecked(
+                new TokenProgram().BurnChecked(
                     mintAccount.PublicKey,
                     initialAccount.PublicKey,
                     ownerAccount,
@@ -484,7 +484,7 @@ namespace Solnet.Programs.Test
             var ownerAccount = wallet.GetAccount(1);
 
             var txInstruction =
-                TokenProgram.Approve(
+                new TokenProgram().Approve(
                     sourceAccount.PublicKey,
                     delegateAccount.PublicKey,
                     ownerAccount,
@@ -510,7 +510,7 @@ namespace Solnet.Programs.Test
                 signers.Add(wallet.GetAccount(420 + i));
             }
             var txInstruction =
-                TokenProgram.Approve(
+                new TokenProgram().Approve(
                     sourceAccount.PublicKey,
                     delegateAccount.PublicKey,
                     ownerAccount,
@@ -538,7 +538,7 @@ namespace Solnet.Programs.Test
             }
 
             var txInstruction =
-                TokenProgram.ApproveChecked(
+                new TokenProgram().ApproveChecked(
                     sourceAccount.PublicKey,
                     delegateAccount.PublicKey,
                     25000,
@@ -568,7 +568,7 @@ namespace Solnet.Programs.Test
                 signers.Add(wallet.GetAccount(420 + i));
             }
             var txInstruction =
-                TokenProgram.Approve(
+                new TokenProgram().Approve(
                     sourceAccount.PublicKey,
                     delegateAccount.PublicKey,
                     ownerAccount,
@@ -588,7 +588,7 @@ namespace Solnet.Programs.Test
             var ownerAccount = wallet.GetAccount(1);
 
             var txInstruction =
-                TokenProgram.Revoke(delegateAccount.PublicKey, ownerAccount);
+                new TokenProgram().Revoke(delegateAccount.PublicKey, ownerAccount);
 
             Assert.AreEqual(2, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(TokenProgramIdBytes, txInstruction.ProgramId);
@@ -609,7 +609,7 @@ namespace Solnet.Programs.Test
                 signers.Add(wallet.GetAccount(420 + i));
             }
             var txInstruction =
-                TokenProgram.Revoke(delegateAccount.PublicKey, ownerAccount, signers);
+                new TokenProgram().Revoke(delegateAccount.PublicKey, ownerAccount, signers);
 
             Assert.AreEqual(7, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(TokenProgramIdBytes, txInstruction.ProgramId);
@@ -632,7 +632,7 @@ namespace Solnet.Programs.Test
             }
 
             var txInstruction =
-                TokenProgram.SetAuthority(
+                new TokenProgram().SetAuthority(
                     account.PublicKey,
                     AuthorityType.AccountOwner,
                     ownerAccount,
@@ -659,7 +659,7 @@ namespace Solnet.Programs.Test
             }
 
             var txInstruction =
-                TokenProgram.SetAuthority(
+                new TokenProgram().SetAuthority(
                     account.PublicKey,
                     AuthorityType.AccountOwner,
                     ownerAccount,
@@ -681,7 +681,7 @@ namespace Solnet.Programs.Test
             var newOwnerAccount = wallet.GetAccount(2);
 
             var txInstruction =
-                TokenProgram.SetAuthority(
+                new TokenProgram().SetAuthority(
                     account.PublicKey,
                     AuthorityType.CloseAccount,
                     ownerAccount,
@@ -702,7 +702,7 @@ namespace Solnet.Programs.Test
             var newOwnerAccount = wallet.GetAccount(2);
 
             var txInstruction =
-                TokenProgram.SetAuthority(
+                new TokenProgram().SetAuthority(
                     account.PublicKey,
                     AuthorityType.FreezeAccount,
                     ownerAccount,
@@ -723,7 +723,7 @@ namespace Solnet.Programs.Test
             var newOwnerAccount = wallet.GetAccount(2);
 
             var txInstruction =
-                TokenProgram.SetAuthority(
+                new TokenProgram().SetAuthority(
                     account.PublicKey,
                     AuthorityType.MintTokens,
                     ownerAccount,
@@ -745,7 +745,7 @@ namespace Solnet.Programs.Test
 
 
             var txInstruction =
-                TokenProgram.Burn(
+                new TokenProgram().Burn(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey, 25000UL, ownerAccount);
 
@@ -770,7 +770,7 @@ namespace Solnet.Programs.Test
             }
 
             var txInstruction =
-                TokenProgram.Burn(
+                new TokenProgram().Burn(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey, 25000UL, ownerAccount, signers);
 
@@ -788,11 +788,11 @@ namespace Solnet.Programs.Test
             var initialAccount = wallet.GetAccount(22);
 
             var txInstruction =
-                TokenProgram.CloseAccount(
+                new TokenProgram().CloseAccount(
                     initialAccount.PublicKey,
                     ownerAccount.PublicKey,
                     ownerAccount,
-                    TokenProgram.ProgramIdKey);
+                    TokenProgram.TokenProgramIdKey);
 
             Assert.AreEqual(3, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(TokenProgramIdBytes, txInstruction.ProgramId);
@@ -814,11 +814,11 @@ namespace Solnet.Programs.Test
             }
 
             var txInstruction =
-                TokenProgram.CloseAccount(
+                new TokenProgram().CloseAccount(
                     initialAccount.PublicKey,
                     ownerAccount.PublicKey,
                     ownerAccount,
-                    TokenProgram.ProgramIdKey, signers);
+                    TokenProgram.TokenProgramIdKey, signers);
 
             Assert.AreEqual(8, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(TokenProgramIdBytes, txInstruction.ProgramId);
@@ -835,11 +835,11 @@ namespace Solnet.Programs.Test
             var initialAccount = wallet.GetAccount(22);
 
             var txInstruction =
-                TokenProgram.FreezeAccount(
+                new TokenProgram().FreezeAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount,
-                    TokenProgram.ProgramIdKey);
+                    TokenProgram.TokenProgramIdKey);
 
             Assert.AreEqual(3, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(TokenProgramIdBytes, txInstruction.ProgramId);
@@ -862,11 +862,11 @@ namespace Solnet.Programs.Test
             }
 
             var txInstruction =
-                TokenProgram.FreezeAccount(
+                new TokenProgram().FreezeAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount,
-                    TokenProgram.ProgramIdKey, signers);
+                    TokenProgram.TokenProgramIdKey, signers);
 
             Assert.AreEqual(8, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(TokenProgramIdBytes, txInstruction.ProgramId);
@@ -882,11 +882,11 @@ namespace Solnet.Programs.Test
             var ownerAccount = wallet.GetAccount(10);
             var initialAccount = wallet.GetAccount(22);
             var txInstruction =
-                TokenProgram.ThawAccount(
+                new TokenProgram().ThawAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount,
-                    TokenProgram.ProgramIdKey);
+                    TokenProgram.TokenProgramIdKey);
 
             Assert.AreEqual(3, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(TokenProgramIdBytes, txInstruction.ProgramId);
@@ -909,11 +909,11 @@ namespace Solnet.Programs.Test
             }
 
             var txInstruction =
-                TokenProgram.ThawAccount(
+                new TokenProgram().ThawAccount(
                     initialAccount.PublicKey,
                     mintAccount.PublicKey,
                     ownerAccount,
-                    TokenProgram.ProgramIdKey, signers);
+                    TokenProgram.TokenProgramIdKey, signers);
 
             Assert.AreEqual(8, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(TokenProgramIdBytes, txInstruction.ProgramId);

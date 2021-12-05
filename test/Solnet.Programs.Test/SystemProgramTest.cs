@@ -147,7 +147,7 @@ namespace Solnet.Programs.Test
                 mintAccount,
                 BalanceForRentExemption,
                 TokenProgram.TokenAccountDataSize,
-                TokenProgram.ProgramIdKey);
+                TokenProgram.TokenProgramIdKey);
 
             Assert.AreEqual(2, txInstruction.Keys.Count);
             CollectionAssert.AreEqual(CreateAccountInstructionBytes, txInstruction.Data);

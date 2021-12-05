@@ -20,6 +20,7 @@ namespace Solnet.Examples
         {
             var programs = new ProgramRegistry();
             programs.AddProgram(new TokenSwapProgram());
+            programs.AddProgram(new TokenProgram());
 
             var ai = RpcClient.GetAccountInfo("GAM8dQkm4LwYJgPZbML61mKPUCQX7uAquxu67p9oifSK");
             var a = programs.DecodeAccount(ai.Result.Value);

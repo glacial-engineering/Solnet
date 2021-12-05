@@ -51,7 +51,7 @@ namespace Solnet.Programs
                 AccountMeta.ReadOnly(owner, false),
                 AccountMeta.ReadOnly(mint, false),
                 AccountMeta.ReadOnly(SystemProgram.ProgramIdKey, false),
-                AccountMeta.ReadOnly(TokenProgram.ProgramIdKey, false),
+                AccountMeta.ReadOnly(TokenProgram.TokenProgramIdKey, false),
                 AccountMeta.ReadOnly(SystemProgram.SysVarRentKey, false)
             };
 
@@ -72,7 +72,7 @@ namespace Solnet.Programs
         public static PublicKey DeriveAssociatedTokenAccount(PublicKey owner, PublicKey mint)
         {
             bool success = AddressExtensions.TryFindProgramAddress(
-                new List<byte[]> { owner.KeyBytes, TokenProgram.ProgramIdKey.KeyBytes, mint.KeyBytes },
+                new List<byte[]> { owner.KeyBytes, TokenProgram.TokenProgramIdKey.KeyBytes, mint.KeyBytes },
                 ProgramIdKey.KeyBytes, out byte[] derivedAssociatedTokenAddress, out _);
             return success ? new PublicKey(derivedAssociatedTokenAddress) : null;
         }

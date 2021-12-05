@@ -203,7 +203,7 @@ namespace Solnet.Extensions
 
             // get sol balance and token accounts
             var balance = await RpcClient.GetBalanceAsync(PublicKey.Key, commitment);
-            var tokenAccounts = await RpcClient.GetTokenAccountsByOwnerAsync(PublicKey.Key, null, TokenProgram.ProgramIdKey, commitment);
+            var tokenAccounts = await RpcClient.GetTokenAccountsByOwnerAsync(PublicKey.Key, null, TokenProgram.TokenProgramIdKey, commitment);
 
             // handle balance response
             if (balance.WasSuccessful)
@@ -404,7 +404,7 @@ namespace Solnet.Extensions
 
             // build transfer instruction
             builder.AddInstruction(
-                Programs.TokenProgram.Transfer(new PublicKey(source.PublicKey),
+                new TokenProgram().Transfer(new PublicKey(source.PublicKey),
                     targetAta, qtyRaw, PublicKey));
 
             // request callee sign the transaction
