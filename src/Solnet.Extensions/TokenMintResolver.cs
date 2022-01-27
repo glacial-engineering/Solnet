@@ -54,7 +54,7 @@ namespace Solnet.Extensions
         /// <returns>An instance of the TokenMintResolver populated with Solana token list definitions.</returns>
         public static TokenMintResolver Load()
         {
-            return LoadAsync().Result;
+            return Task.Run(async ()=> await LoadAsync().ConfigureAwait(false)).Result;
         }
 
         /// <summary>

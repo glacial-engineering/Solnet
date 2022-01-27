@@ -163,6 +163,7 @@ namespace Solnet.Rpc.Models
         /// <summary>
         /// List of base-58 encoded public keys used by the transaction, including by the instructions and for signatures.
         /// </summary>
+        //[JsonConverter(typeof(Converters.AccountKeysJsonConverter))]
         public string[] AccountKeys { get; set; }
 
         /// <summary>
@@ -299,6 +300,7 @@ namespace Solnet.Rpc.Models
         /// <summary>
         /// List of ordered indices into the <i>Message.AccountKeys</i> array indicating which accounts to pass to the program.
         /// </summary>
+        //[JsonIgnore]
         public int[] Accounts { get; set; }
 
         /// <summary>

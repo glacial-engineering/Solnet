@@ -62,12 +62,19 @@ namespace Solnet.Rpc.Converters
 
             reader.Read();
 
-            if (reader.TokenType != JsonTokenType.Number)
+            if (reader.TokenType == JsonTokenType.Number)
+            {
+                err.InstructionError.InstructionIndex = reader.GetInt32();
+            }
+            else if (reader.TokenType == JsonTokenType.String)
+            {
+                err.InstructionError.InstructionIndex = int.Parse(reader.GetString());
+            }
+            else
             {
                 throw new JsonException("Unexpected error value.");
             }
 
-            err.InstructionError.InstructionIndex = reader.GetInt32();
 
             reader.Read();
 
