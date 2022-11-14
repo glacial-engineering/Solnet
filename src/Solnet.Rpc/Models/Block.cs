@@ -269,6 +269,8 @@ namespace Solnet.Rpc.Models
         /// Token balance details.
         /// </summary>
         public TokenBalance UiTokenAmount { get; set; }
+
+        public string? Owner { get; set; }
     }
 
     /// <summary>
