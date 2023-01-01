@@ -48,6 +48,10 @@ namespace Solnet.Rpc.Models
         /// </summary>
         InsufficientFundsForFee,
         /// <summary>
+        /// The from `Pubkey` does not have sufficient balance to pay the rent
+        /// </summary>
+        InsufficientFundsForRent,
+        /// <summary>
         /// This account may not be used to pay transaction fees
         /// </summary>
         InvalidAccountForFee,

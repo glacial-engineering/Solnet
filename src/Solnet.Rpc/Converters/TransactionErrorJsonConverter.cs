@@ -57,7 +57,21 @@ namespace Solnet.Rpc.Converters
 
             if (reader.TokenType != JsonTokenType.StartArray)
             {
-                throw new JsonException("Unexpected error value.");
+                if (reader.TokenType == JsonTokenType.StartObject)
+                {
+                    //consume and ignore the object
+                    while (reader.TokenType != JsonTokenType.EndObject)
+                    {
+                        reader.Read();
+                    }
+                    reader.Read();
+                    reader.Read();
+                    return err;
+                }
+                else
+                {
+                    throw new JsonException("Unexpected error value.");
+                }
             }
 
             reader.Read();
