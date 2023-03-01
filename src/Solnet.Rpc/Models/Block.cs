@@ -81,6 +81,8 @@ namespace Solnet.Rpc.Models
         /// The metadata information.
         /// </summary>
         public TransactionMeta Meta { get; set; }
+
+        public object Version { get; set; }
     }
 
     /// <summary>
@@ -180,6 +182,15 @@ namespace Solnet.Rpc.Models
         /// List of program instructions that will be executed in sequence and committed in one atomic transaction if all succeed.
         /// </summary>
         public InstructionInfo[] Instructions { get; set; }
+
+        public AddressTableLookup[] AddressTableLookups { get; set; }
+    }
+
+    public class AddressTableLookup
+    {
+        public string AccountKey { get; set; }
+        public int[] WritableIndexes { get; set; }
+        public int[] ReadonlyIndexes { get; set; }
     }
 
     /// <summary>
@@ -248,6 +259,14 @@ namespace Solnet.Rpc.Models
         /// Array of string log messages or omitted if log message recording was not yet enabled during this transaction.
         /// </summary>
         public string[] LogMessages { get; set; }
+
+        public LoadedAddresses LoadedAddresses { get; set; }
+    }
+
+    public class LoadedAddresses
+    {
+        public string[] Writable { get; set; }
+        public string[] Readonly { get; set; }
     }
 
     /// <summary>

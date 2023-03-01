@@ -425,7 +425,7 @@ namespace Solnet.Rpc
         {
             return await SendRequestAsync<TransactionMetaSlotInfo>("getTransaction",
                 Parameters.Create(signature,
-                    ConfigObject.Create(KeyValue.Create("encoding", "json"), HandleCommitment(commitment))));
+                    ConfigObject.Create(KeyValue.Create("encoding", "json"), HandleCommitment(commitment), KeyValue.Create("maxSupportedTransactionVersion", 0))));
         }
 
         public async Task<RequestResult<TransactionMetaSlotInfo>> GetConfirmedTransactionAsync(string signature,
