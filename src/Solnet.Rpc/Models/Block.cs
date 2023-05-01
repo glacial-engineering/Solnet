@@ -235,6 +235,11 @@ namespace Solnet.Rpc.Models
         public InnerInstruction[] InnerInstructions { get; set; }
 
         /// <summary>
+        /// List of inner instructions or omitted if inner instruction recording was not yet enabled during this transaction.
+        /// </summary>
+        public LoadedAddresses LoadedAddresses { get; set; }
+
+        /// <summary>
         /// List of token balances from before the transaction was processed or omitted if token balance recording was not yet enabled during this transaction.
         /// </summary>
         public TokenBalanceInfo[] PreTokenBalances { get; set; }
@@ -248,6 +253,12 @@ namespace Solnet.Rpc.Models
         /// Array of string log messages or omitted if log message recording was not yet enabled during this transaction.
         /// </summary>
         public string[] LogMessages { get; set; }
+    }
+
+    public class LoadedAddresses
+    {
+        public string[] Readonly { get; set; }
+        public string[] Writable { get; set; }
     }
 
     /// <summary>
