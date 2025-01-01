@@ -65,7 +65,7 @@ namespace Solnet.Rpc.Converters
                         reader.Read();
                     }
                     reader.Read();
-                    reader.Read();
+                    //reader.Read();
                     return err;
                 }
                 else
